@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Pro,CA,25.00,Tile,123.00,3.50,4.15,430.50,510.45,235.24,1176.19

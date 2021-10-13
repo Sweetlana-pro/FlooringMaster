@@ -11,8 +11,14 @@ package com.sg.flooringmaster.service;
  */
 public class ProductValidationException extends Exception {
 
-    ProductValidationException(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ProductValidationException(String message) {
+     
+        super(message);
     }
+
+    ProductValidationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+    
     
 }

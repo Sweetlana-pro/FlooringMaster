@@ -46,45 +46,47 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
     public FlooringMasterOrderDaoFileImpl(String dataFolder) {
         this.dataFolder = dataFolder;
     }
-    //Figuring out the number of the last order to give the next number to a new order
-    private void readLastOrderNumber() throws FlooringMasterPersistenceException {
+    
+    private void readOrders() throws FlooringMasterPersistenceException {
         Scanner scanner;
 
         try {
             //Create Scanner to read file
             scanner = new Scanner(
                     new BufferedReader(
-                            new FileReader(dataFolder + "LastOrderNumber.txt")));
+                            new FileReader(dataFolder)));
         } catch (FileNotFoundException e) {
             
             throw new FlooringMasterPersistenceException(
-                    "-_- Could not load order number into memory.", e);
+                    "-_- Could not load order into memory.", e);
         }
 
-        int savedOrderNumber = Integer.parseInt(scanner.nextLine());
+        //int savedOrderNumber = Integer.parseInt(scanner.nextLine());
 
-        this.lastOrderNumber = savedOrderNumber;
-
+        //this.lastOrderNumber = savedOrderNumber;
+        
         scanner.close();
 
     }
+   
 
-    private void writeLastOrderNumber(int lastOrderNumber) throws FlooringMasterPersistenceException {
+    private void writeExportDataFile() throws FlooringMasterPersistenceException {
         PrintWriter out;
 
         try {
-            out = new PrintWriter(new FileWriter(dataFolder + "LastOrderNumber.txt"));
+            out = new PrintWriter(new FileWriter(dataFolder + "ExportData.txt"));
         } catch (IOException e) {
             throw new FlooringMasterPersistenceException(
-                    "Could not save order number.", e);
+                    "Could not export an order", e);
         }
 
-        out.println(lastOrderNumber);
+        //out.println(lastOrderNumber);
 
         out.flush();
 
         out.close();
     }
+    
 
     @Override
     public List<Order> getOrders(LocalDate chosenDate) throws FlooringMasterPersistenceException {

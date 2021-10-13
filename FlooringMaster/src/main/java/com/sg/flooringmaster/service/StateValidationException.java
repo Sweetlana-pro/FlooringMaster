@@ -11,8 +11,14 @@ package com.sg.flooringmaster.service;
  */
 public class StateValidationException extends Exception {
 
-    StateValidationException(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    StateValidationException(String message) {
+        
+        super(message);
     }
+
+    StateValidationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+    
     
 }

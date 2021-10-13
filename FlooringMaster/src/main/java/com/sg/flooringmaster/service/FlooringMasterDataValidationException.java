@@ -11,8 +11,14 @@ package com.sg.flooringmaster.service;
  */
 public class FlooringMasterDataValidationException extends Exception {
 
-    FlooringMasterDataValidationException(String error_Please_enter_the_information_in_the) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    FlooringMasterDataValidationException(String message) {
+     
+        super(message);
     }
+
+    FlooringMasterDataValidationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+    
     
 }

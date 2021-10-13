@@ -56,8 +56,8 @@ public class FlooringMasterView {
     }
 
     public LocalDate inputDate() {
-        return io.readDate("Please enter a date. (MM-DD-YYYY)",
-                LocalDate.of(2012, 10, 10), LocalDate.of(2050, 1, 31));
+        return io.readDate("Please enter a date beginning from tomorrow. (MM-DD-YYYY)",
+                LocalDate.now().plusDays(1), LocalDate.of(2050, 1, 31));
     }
 
     public String inputCustomerName() {
@@ -66,16 +66,15 @@ public class FlooringMasterView {
 
     public String inputStateAbbr() {
         return io.readString("Please enter your state's USPS abbreviation. "
-                + "(Ex. MI)", 2);
+                + "(Ex. KY,CA, WA, TX)", 2);
     }
 
     public String inputProductType() {
-        return io.readString("Please enter the product from dethe list above.", 15);
+        return io.readString("Please enter the product from the list above.", 15);
     }
 
     public BigDecimal inputArea() {
-        return io.readBigDecimal("Please enter the area of your project "
-                + "in square feet.", 2, BigDecimal.ZERO);
+        return io.readBigDecimal("Please enter the area of your project, minimum 100 sqft ", 3, BigDecimal.ZERO);
     }
 
     public void displayDateBanner(LocalDate dateChoice) {

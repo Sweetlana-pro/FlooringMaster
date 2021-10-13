@@ -84,8 +84,10 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
     
      private void calculateMaterial(Order o) throws FlooringMasterPersistenceException,
             ProductValidationException {
-        //Set product information in order.
+        
         Product chosenProduct = productsDao.getProduct(o.getProductType());
+        
+        
         if (chosenProduct == null) {
             throw new ProductValidationException("SORRY: We do not sell this product ");
                    
@@ -129,7 +131,7 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         if (o.getProductType().trim().isEmpty() || o.getProductType() == null) {
             message += "Product type is required.\n";
         }
-        if (o.getArea().compareTo(BigDecimal.ZERO) == 0 || o.getArea() == null) {
+        if (o.getArea().compareTo(BigDecimal.ZERO) <= 100 || o.getArea() == null) {
             message += "Area square footage is required.";
         }
         if (!message.isEmpty()) {

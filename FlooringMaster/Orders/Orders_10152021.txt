@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+0,Dotsie,KY,6.00,Carpet,95.00,2.25,2.10,213.75,199.50,24.80,438.05

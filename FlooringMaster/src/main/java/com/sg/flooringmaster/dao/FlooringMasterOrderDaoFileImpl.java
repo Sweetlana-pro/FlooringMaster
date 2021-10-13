@@ -46,7 +46,7 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
     public FlooringMasterOrderDaoFileImpl(String dataFolder) {
         this.dataFolder = dataFolder;
     }
-
+    //Figuring out the number of the last order to give the next number to a new order
     private void readLastOrderNumber() throws FlooringMasterPersistenceException {
         Scanner scanner;
 
@@ -56,7 +56,7 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
                     new BufferedReader(
                             new FileReader(dataFolder + "LastOrderNumber.txt")));
         } catch (FileNotFoundException e) {
-            //Throwing a general exception to the calling code
+            
             throw new FlooringMasterPersistenceException(
                     "-_- Could not load order number into memory.", e);
         }
@@ -94,12 +94,12 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
     @Override
     public Order addOrder(Order o) throws FlooringMasterPersistenceException {
         //Checks input for commas
-        o = cleanFields(o);
+        /*o = cleanFields(o);
         //Getting the last used number, adding one, and saving it
         readLastOrderNumber();
         lastOrderNumber++;
         o.setOrderNumber(lastOrderNumber);
-        writeLastOrderNumber(lastOrderNumber);
+        writeLastOrderNumber(lastOrderNumber);*/
 
         List<Order> orders = loadOrders(o.getDate());
         orders.add(o);
@@ -206,7 +206,6 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
                     currentOrder.setTotal(new BigDecimal(currentTokens[11]));
                     orders.add(currentOrder);
                 } else {
-                    //Ignore line.
                 }
             }
             scanner.close();
@@ -236,19 +235,18 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
         // Write out the Order objects to the file.
         out.println(HEADER);
         for (Order currentOrder : orders) {
-            // Write the Order objects to the file
             out.println(currentOrder.getOrderNumber() + DELIMITER
-                    + currentOrder.getCustomerName() + DELIMITER
-                    + currentOrder.getStateAbbr() + DELIMITER
-                    + currentOrder.getTaxRate() + DELIMITER
-                    + currentOrder.getProductType() + DELIMITER
-                    + currentOrder.getArea() + DELIMITER
-                    + currentOrder.getMaterialCostPerSquareFoot() + DELIMITER
-                    + currentOrder.getLaborCostPerSquareFoot() + DELIMITER
-                    + currentOrder.getMaterialCost() + DELIMITER
-                    + currentOrder.getLaborCost() + DELIMITER
-                    + currentOrder.getTax() + DELIMITER
-                    + currentOrder.getTotal());
+                + currentOrder.getCustomerName() + DELIMITER
+                + currentOrder.getStateAbbr() + DELIMITER
+                + currentOrder.getTaxRate() + DELIMITER
+                + currentOrder.getProductType() + DELIMITER
+                + currentOrder.getArea() + DELIMITER
+                + currentOrder.getMaterialCostPerSquareFoot() + DELIMITER
+                + currentOrder.getLaborCostPerSquareFoot() + DELIMITER
+                + currentOrder.getMaterialCost() + DELIMITER
+                + currentOrder.getLaborCost() + DELIMITER
+                + currentOrder.getTax() + DELIMITER
+                + currentOrder.getTotal());
             
             out.flush();
         }

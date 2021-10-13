@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+0,BEN,WA,9.25,Tile,340.00,3.50,4.15,1190.00,1411.00,240.59,2841.59

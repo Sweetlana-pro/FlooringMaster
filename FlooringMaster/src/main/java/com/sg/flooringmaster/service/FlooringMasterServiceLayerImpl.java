@@ -49,8 +49,8 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         if (!ordersByDate.isEmpty()) {
             return ordersByDate;
         } else {
-            throw new InvalidOrderNumberException("ERROR: No orders "
-                    + "exist on that date.");
+            throw new InvalidOrderNumberException("SORRY: No orders exist on your date. ");
+                   
         }
     }
 
@@ -64,8 +64,8 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         if (chosenOrder != null) {
             return chosenOrder;
         } else {
-            throw new InvalidOrderNumberException("ERROR: No orders with that number "
-                    + "exist on that date.");
+            throw new InvalidOrderNumberException("SORRY: There are no orders with that number on that date ");
+                    
         }
     }
 
@@ -87,8 +87,8 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         //Set product information in order.
         Product chosenProduct = productsDao.getProduct(o.getProductType());
         if (chosenProduct == null) {
-            throw new ProductValidationException("ERROR: We do not sell that "
-                    + "product.");
+            throw new ProductValidationException("SORRY: We do not sell this product ");
+                   
         }
         o.setProductType(chosenProduct.getProductType());
         o.setMaterialCostPerSquareFoot(chosenProduct.getMaterialCostPerSquareFoot());
@@ -140,9 +140,7 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
     @Override
     public Order addOrder(Order o) throws FlooringMasterPersistenceException {
         orderDao.addOrder(o);
-        //auditDao.writeAuditEntry("Order #"
-               // + o.getOrderNumber() + " for date "
-               // + o.getDate() + " ADDED.");
+        
         return o;
     }
 
@@ -188,32 +186,26 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
     public Order editOrder(Order updatedOrder) throws FlooringMasterPersistenceException,
             InvalidOrderNumberException {
         updatedOrder = orderDao.editOrder(updatedOrder);
-        /*if (updatedOrder != null) {
-            auditDao.writeAuditEntry("Order #"
-                    + updatedOrder.getOrderNumber() + " for date "
-                    + updatedOrder.getDate() + " EDITED.");
+        if (updatedOrder != null) {
+            
             return updatedOrder;
         } else {
-            throw new InvalidOrderNumberException("ERROR: No orders with that number "
-                    + "exist on that date.");
-        }*/
-        return updatedOrder;
+            throw new InvalidOrderNumberException("SORRY: There are no orders with that number on that date ");
+        }
+        
     }
 
     @Override
     public Order removeOrder(Order removedOrder) throws FlooringMasterPersistenceException,
             InvalidOrderNumberException {
         removedOrder = orderDao.removeOrder(removedOrder);
-        /*if (removedOrder != null) {
-            auditDao.writeAuditEntry("Order #"
-                    + removedOrder.getOrderNumber() + " for date "
-                    + removedOrder.getDate() + " REMOVED.");
+        if (removedOrder != null) {
+            
             return removedOrder;
         } else {
-            throw new InvalidOrderNumberException("ERROR: No orders with that number "
-                    + "exist on that date.");
-        }*/
-        return removedOrder;
+            throw new InvalidOrderNumberException("SORRY: There are no orders with that number on that date ");
+        }
+        
     }
 
     

@@ -36,6 +36,11 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         this.productsDao = productDao;
         this.stateDao = stateDao;
     }
+    
+    @Override
+    public List<Product> getAllProducts() throws FlooringMasterPersistenceException {
+        return productsDao.getProducts();
+    }
 
     @Override
     public List<Order> getOrders(LocalDate chosenDate) throws InvalidOrderNumberException,
@@ -76,20 +81,8 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         return o;
 
     }
-
-    private void calculateTax(Order o) throws FlooringMasterPersistenceException,
-            StateValidationException {
-        //Set state information in order.
-        State chosenState = stateDao.getState(o.getStateAbbr());
-        if (chosenState == null) {
-            throw new StateValidationException("ERROR: SWG Corp does not "
-                    + "serve that state.");
-        }
-        o.setStateAbbr(chosenState.getStateAbbr());
-        o.setTaxRate(chosenState.getTaxRate());
-    }
-
-    private void calculateMaterial(Order o) throws FlooringMasterPersistenceException,
+    
+     private void calculateMaterial(Order o) throws FlooringMasterPersistenceException,
             ProductValidationException {
         //Set product information in order.
         Product chosenProduct = productsDao.getProduct(o.getProductType());
@@ -102,8 +95,19 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         o.setLaborCostPerSquareFoot(chosenProduct.getLaborCostPerSquareFoot());
     }
 
+    private void calculateTax(Order o) throws FlooringMasterPersistenceException,
+            StateValidationException {
+        //Set state information in order.
+        State chosenState = stateDao.getState(o.getStateAbbr());
+        if (chosenState == null) {
+            throw new StateValidationException("SORRY: we do not serve this state");
+                    
+        }
+        o.setStateAbbr(chosenState.getStateAbbr());
+        o.setTaxRate(chosenState.getTaxRate());
+    }
+
     private void calculateTotal(Order o) {
-        //Calculate other order fields.
         o.setMaterialCost(o.getMaterialCostPerSquareFoot().multiply(o.getArea())
                 .setScale(2, RoundingMode.HALF_UP));
         o.setLaborCost(o.getLaborCostPerSquareFoot().multiply(o.getArea())
@@ -211,6 +215,8 @@ public class FlooringMasterServiceLayerImpl implements FlooringMasterServiceLaye
         }*/
         return removedOrder;
     }
+
+    
 
     
 

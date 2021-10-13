@@ -24,15 +24,31 @@ public class FlooringMasterView {
     }
 
     public int printMenuAndGetSelection() {
-        io.print("=== SWG Corp Main Menu ===");
+        io.print("=== Main Menu ===");
         io.print("1. Display Orders");
         io.print("2. Add an Order");
         io.print("3. Edit an Order");
-        io.print("4. Remove an Order");
-        io.print("5. Exit");
-
-        return io.readInt("Please select from the"
-                + " above options.", 1, 5);
+        io.print("5. Export Data");
+        io.print("6. Quit");
+        return io.readInt("Please select from above choices", 1, 6);
+    }
+    public void displayProductsList(List<Product> productsList) {
+        
+        for (Product currentProducts : productsList) {
+            
+            io.print(        
+                    currentProducts.getProductType()
+                    + " | Cost PerSqaureFoot: "
+                    + currentProducts.getMaterialCostPerSquareFoot()
+                    + " | Labor Cost PerSqaureFoot: "
+                    + currentProducts.getLaborCostPerSquareFoot());
+            //io.print(productsInfo);
+        }
+        //io.print("Choose your material\n");
+        
+    }  
+    public void displayProductsTypeBanner() {
+        io.print("===Types of material===");
     }
 
     public void displayDisplayOrdersBanner() {
@@ -54,7 +70,7 @@ public class FlooringMasterView {
     }
 
     public String inputProductType() {
-        return io.readString("Please enter the product you will be using.", 15);
+        return io.readString("Please enter the product from dethe list above.", 15);
     }
 
     public BigDecimal inputArea() {
@@ -101,7 +117,7 @@ public class FlooringMasterView {
     }
 
     public String askSave() {
-        return io.readString("Would you like to save this order? Y/N", 1);
+        return io.readString("Would you like to place this order? Y/N", 1);
     }
 
     public void displayAddOrderSuccess(boolean success, Order o) {

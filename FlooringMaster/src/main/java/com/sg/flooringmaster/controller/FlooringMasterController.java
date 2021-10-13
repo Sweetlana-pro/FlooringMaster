@@ -7,6 +7,7 @@ package com.sg.flooringmaster.controller;
 
 
 import com.sg.flooringmaster.dto.Order;
+import com.sg.flooringmaster.dto.Product;
 import com.sg.flooringmaster.service.FlooringMasterServiceLayer;
 import com.sg.flooringmaster.ui.FlooringMasterView;
 import com.sg.flooringmaster.service.FlooringMasterPersistenceException;
@@ -14,6 +15,8 @@ import com.sg.flooringmaster.service.FlooringMasterDataValidationException;
 import com.sg.flooringmaster.service.InvalidOrderNumberException;
 import com.sg.flooringmaster.service.ProductValidationException;
 import com.sg.flooringmaster.service.StateValidationException;
+import com.sg.flooringmaster.ui.UserIO;
+import com.sg.flooringmaster.ui.UserIOConsoleImpl;
 import java.time.LocalDate;
 import java.util.List;
 /**
@@ -21,6 +24,7 @@ import java.util.List;
  * @author pro
  */
 public class FlooringMasterController {
+    private UserIO io = new UserIOConsoleImpl ();
     private FlooringMasterView view;
     private FlooringMasterServiceLayer service;
 
@@ -43,6 +47,7 @@ public class FlooringMasterController {
                         getOrdersByDate();
                         break;
                     case 2:
+                        listProdType();
                         addOrder();
                         break;
                     case 3:
@@ -52,6 +57,9 @@ public class FlooringMasterController {
                         removeOrder();
                         break;
                     case 5:
+                        io.print("EXPORT DATA");
+                        break;
+                    case 6:
                         keepGoing = false;
                         break;
                     default:
@@ -67,6 +75,12 @@ public class FlooringMasterController {
 
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
+    }
+    private void listProdType() throws FlooringMasterPersistenceException {
+        view.displayProductsTypeBanner();
+        List<Product> products = service.getAllProducts();
+        view.displayProductsList(products);
+
     }
 
     private void getOrdersByDate() throws FlooringMasterPersistenceException, FlooringMasterPersistenceException {

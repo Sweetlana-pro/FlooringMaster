@@ -17,5 +17,6 @@ public interface FlooringMasterProductDao {
     //List<Product> getProducts();
 
     Product getProduct(String productType) throws FlooringMasterPersistenceException;
+    List<Product> getProducts();
 
 }

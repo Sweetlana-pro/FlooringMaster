@@ -12,7 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,24 +24,28 @@ import java.util.logging.Logger;
  * @author pro
  */
 public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDao {
+    
     public static final String PRODUCT_FILE = "Products.txt";
     public static final String DELIMITER = ",";
-/*
-    private List<Product> products = new ArrayList<>();
 
+    //private List<Product> products = new ArrayList<>();
+    private Map<String, Product> productMap = new HashMap<>();
+    
     @Override
     public List<Product> getProducts() {
         try {
             loadProducts();
-        } catch (DataPersistenceException ex) {
+        } catch (FlooringMasterPersistenceException ex) {
             Logger.getLogger(FlooringMasterProductDaoFileImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new ArrayList<Product>(products);
-    }*/
-
-      @Override
+        return new ArrayList<Product>(productMap.values());
+    }
+    
+    @Override
     public Product getProduct(String productType) throws FlooringMasterPersistenceException {
-        List<Product> products = loadProducts();
+        loadProducts();
+        return productMap.get(productType);
+        /*List<Product> products = loadProducts();
         if (products == null) {
             return null;
         } else {
@@ -47,10 +53,20 @@ public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDa
                     .filter(p -> p.getProductType().equalsIgnoreCase(productType))
                     .findFirst().orElse(null);
             return chosenProduct;
-        }
+        }*/
+    }
+    //Translating a line of text into object
+    private Product unmarshallProducts (String productsAsText) {
+        String[] productsTokens = productsAsText.split(DELIMITER);
+        String productType = productsTokens[0];
+        Product productFromFile = new Product(productType);
+        productFromFile.setMaterialCostPerSquareFoot(new BigDecimal(productsTokens[1]));
+        productFromFile.setLaborCostPerSquareFoot(new BigDecimal (productsTokens[2]));
+        
+        return productFromFile;
     }
 
-    private List<Product> loadProducts() throws FlooringMasterPersistenceException {
+    private void /*List<Product>*/ loadProducts() throws FlooringMasterPersistenceException {
         Scanner scanner;
         List<Product> products = new ArrayList<>();
 
@@ -62,8 +78,21 @@ public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDa
             throw new FlooringMasterPersistenceException(
                     "-_- Could not load products data into memory.", e);
         }
+        
+         String currentLine;
+        Product currentProduct;
+        //String[] currentTokens;
 
-        String currentLine;
+        while (scanner.hasNextLine()) {
+            currentLine = scanner.nextLine();
+            currentProduct = unmarshallProducts (currentLine);
+            
+            productMap.put(currentProduct.getProductType(), currentProduct);
+        }
+        scanner.close();
+        
+
+        /*String currentLine;
         String[] currentTokens;
         scanner.nextLine();//Skips scanning document headers       
         while (scanner.hasNextLine()) {
@@ -86,6 +115,6 @@ public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDa
             return products;
         } else {
             return null;
-        }
+        }*/
     }
 }

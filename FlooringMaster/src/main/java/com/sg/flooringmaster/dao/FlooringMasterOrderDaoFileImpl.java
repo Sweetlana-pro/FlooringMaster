@@ -221,8 +221,8 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
 
         PrintWriter out;
 
-        String fileDate = orderDate.format(DateTimeFormatter
-                .ofPattern("MMddyyyy"));
+        String fileDate = orderDate.format(DateTimeFormatter.
+                ofPattern("MMddyyyy"));
 
         File f = new File(String.format(dataFolder + "Orders_%s.txt", fileDate));
 
@@ -249,11 +249,9 @@ public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
                     + currentOrder.getLaborCost() + DELIMITER
                     + currentOrder.getTax() + DELIMITER
                     + currentOrder.getTotal());
-
-            //Force PrintWriter to write line to the file
+            
             out.flush();
         }
-        //Clean up
         out.close();
     }
 }

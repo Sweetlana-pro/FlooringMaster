@@ -7,6 +7,7 @@ package com.sg.flooringmaster.service;
 
 import com.sg.flooringmaster.service.FlooringMasterPersistenceException;
 import com.sg.flooringmaster.dto.Order;
+import com.sg.flooringmaster.dto.Product;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public interface FlooringMasterServiceLayer {
     List<Order> getOrders(LocalDate dateChoice) throws InvalidOrderNumberException,
             FlooringMasterPersistenceException;
+    List<Product> getAllProducts () throws FlooringMasterPersistenceException;
 
     Order calculateOrder(Order o) throws FlooringMasterPersistenceException,
             FlooringMasterDataValidationException, StateValidationException, ProductValidationException;

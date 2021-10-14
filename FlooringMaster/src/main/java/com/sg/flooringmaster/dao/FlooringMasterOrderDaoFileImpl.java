@@ -34,10 +34,10 @@ import java.util.Set;
  */
 public class FlooringMasterOrderDaoFileImpl implements FlooringMasterOrderDao {
     private int lastOrderNumber;
-    private static final String HEADER = "OrderNumber,CustomerName,State,TaxRate,"
+    private final String HEADER = "OrderNumber,CustomerName,State,TaxRate,"
             + "ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,"
             + "MaterialCost,LaborCost,Tax,Total";
-    private static final String DELIMITER = ",";
+    private final String DELIMITER = ",";
     private String dataFolder = "orders/";
 
     public FlooringMasterOrderDaoFileImpl() {

@@ -132,4 +132,83 @@ public class Order {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.date);
+        hash = 29 * hash + this.orderNumber;
+        hash = 29 * hash + Objects.hashCode(this.customerName);
+        hash = 29 * hash + Objects.hashCode(this.stateAbbr);
+        hash = 29 * hash + Objects.hashCode(this.taxRate);
+        hash = 29 * hash + Objects.hashCode(this.productType);
+        hash = 29 * hash + Objects.hashCode(this.area);
+        hash = 29 * hash + Objects.hashCode(this.materialCostPerSquareFoot);
+        hash = 29 * hash + Objects.hashCode(this.laborCostPerSquareFoot);
+        hash = 29 * hash + Objects.hashCode(this.materialCost);
+        hash = 29 * hash + Objects.hashCode(this.laborCost);
+        hash = 29 * hash + Objects.hashCode(this.tax);
+        hash = 29 * hash + Objects.hashCode(this.total);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Order other = (Order) obj;
+        if (this.orderNumber != other.orderNumber) {
+            return false;
+        }
+        if (!Objects.equals(this.customerName, other.customerName)) {
+            return false;
+        }
+        if (!Objects.equals(this.stateAbbr, other.stateAbbr)) {
+            return false;
+        }
+        if (!Objects.equals(this.productType, other.productType)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.taxRate, other.taxRate)) {
+            return false;
+        }
+        if (!Objects.equals(this.area, other.area)) {
+            return false;
+        }
+        if (!Objects.equals(this.materialCostPerSquareFoot, other.materialCostPerSquareFoot)) {
+            return false;
+        }
+        if (!Objects.equals(this.laborCostPerSquareFoot, other.laborCostPerSquareFoot)) {
+            return false;
+        }
+        if (!Objects.equals(this.materialCost, other.materialCost)) {
+            return false;
+        }
+        if (!Objects.equals(this.laborCost, other.laborCost)) {
+            return false;
+        }
+        if (!Objects.equals(this.tax, other.tax)) {
+            return false;
+        }
+        if (!Objects.equals(this.total, other.total)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "date=" + date + ", orderNumber=" + orderNumber + ", customerName=" + customerName + ", stateAbbr=" + stateAbbr + ", taxRate=" + taxRate + ", productType=" + productType + ", area=" + area + ", materialCostPerSquareFoot=" + materialCostPerSquareFoot + ", laborCostPerSquareFoot=" + laborCostPerSquareFoot + ", materialCost=" + materialCost + ", laborCost=" + laborCost + ", tax=" + tax + ", total=" + total + '}';
+    }
+    
 }

@@ -44,4 +44,43 @@ public class Product {
     public void setLaborCostPerSquareFoot(BigDecimal laborCostPerSquareFoot) {
         this.laborCostPerSquareFoot = laborCostPerSquareFoot;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.productType);
+        hash = 79 * hash + Objects.hashCode(this.materialCostPerSquareFoot);
+        hash = 79 * hash + Objects.hashCode(this.laborCostPerSquareFoot);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (!Objects.equals(this.productType, other.productType)) {
+            return false;
+        }
+        if (!Objects.equals(this.materialCostPerSquareFoot, other.materialCostPerSquareFoot)) {
+            return false;
+        }
+        if (!Objects.equals(this.laborCostPerSquareFoot, other.laborCostPerSquareFoot)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "productType=" + productType + ", materialCostPerSquareFoot=" + materialCostPerSquareFoot + ", laborCostPerSquareFoot=" + laborCostPerSquareFoot + '}';
+    }
+    
 }

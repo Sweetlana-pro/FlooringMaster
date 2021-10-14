@@ -20,8 +20,16 @@ import java.util.Scanner;
  * @author pro
  */
 public class FlooringMasterStateDaoFileImpl implements FlooringMasterStateDao {
-     public static final String STATE_FILE = "Taxes.txt";
+    private final String STATE_FILE;
     public static final String DELIMITER = ",";
+    
+    public FlooringMasterStateDaoFileImpl() {
+        STATE_FILE = "Taxes.txt";
+    }
+    
+    public FlooringMasterStateDaoFileImpl(String taxesTextFile) {
+        STATE_FILE = taxesTextFile;
+    }
 
     //private List<State> states = new ArrayList();
 

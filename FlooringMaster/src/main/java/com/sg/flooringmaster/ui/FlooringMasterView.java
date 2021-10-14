@@ -42,9 +42,9 @@ public class FlooringMasterView {
                     + currentProducts.getMaterialCostPerSquareFoot()
                     + " | Labor Cost PerSqaureFoot: "
                     + currentProducts.getLaborCostPerSquareFoot());
-            //io.print(productsInfo);
+            
         }
-        //io.print("Choose your material\n");
+        
         
     }  
     public void displayProductsTypeBanner() {

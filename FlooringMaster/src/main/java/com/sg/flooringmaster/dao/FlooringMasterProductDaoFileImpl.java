@@ -25,8 +25,15 @@ import java.util.logging.Logger;
  */
 public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDao {
     
-    public static final String PRODUCT_FILE = "Products.txt";
-    public static final String DELIMITER = ",";
+    private final String PRODUCT_FILE;
+    public  final String DELIMITER = ",";
+    
+    public FlooringMasterProductDaoFileImpl() {
+        PRODUCT_FILE = "Products.txt";
+    }
+    public FlooringMasterProductDaoFileImpl(String productTextFile) {
+        PRODUCT_FILE = productTextFile;
+    }
 
     //private List<Product> products = new ArrayList<>();
     private Map<String, Product> productMap = new HashMap<>();
@@ -91,30 +98,5 @@ public class FlooringMasterProductDaoFileImpl implements FlooringMasterProductDa
         }
         scanner.close();
         
-
-        /*String currentLine;
-        String[] currentTokens;
-        scanner.nextLine();//Skips scanning document headers       
-        while (scanner.hasNextLine()) {
-            currentLine = scanner.nextLine();
-            currentTokens = currentLine.split(DELIMITER);
-            if (currentTokens.length == 3) {
-                Product currentProduct = new Product();
-                currentProduct.setProductType(currentTokens[0]);
-                currentProduct.setMaterialCostPerSquareFoot(new BigDecimal(currentTokens[1]));
-                currentProduct.setLaborCostPerSquareFoot(new BigDecimal(currentTokens[2]));
-                // Put currentProduct into the map using productType as the key
-                products.add(currentProduct);
-            } else {
-                //Ignores line if delimited wrong or empty.
-            }
-        }
-        scanner.close();
-
-        if (!products.isEmpty()) {
-            return products;
-        } else {
-            return null;
-        }*/
     }
 }
